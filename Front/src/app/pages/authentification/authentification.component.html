@@ -1,16 +1,3 @@
 /auth
 
-<div fxLayout="column" fxFlexAlign="center">
-  <div fxFlex="20" fxFill>
-    <mat-form-field fxFill><textarea fxFill mdInput placeholder="qrr-value (URL or DATA URL)"
-        [(ngModel)]="value"></textarea></mat-form-field>
-    <br />
-  </div>
-  <div fxFlex="60" fxFill>
-    <ng2-qrcode-reader (result)="render($event)" [qrr-show]="showQRCode" [qrr-value]="value" [qrr-type]="elementType">
-    </ng2-qrcode-reader>
-  </div>
-  <p>Result</p>
-  <div #result fxFlex="20" fxFill>
-  </div>
-</div>
+<zxing-scanner [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"></zxing-scanner>

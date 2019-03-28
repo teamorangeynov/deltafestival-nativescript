@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from '../app/pages/home/home.component'
 import { AuthentificationComponent } from '../app/pages/authentification/authentification.component';
 
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgQRCodeReaderModule } from 'ng2-qrcode-reader';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { NgQRCodeReaderModule } from 'ng2-qrcode-reader';
     NgQRCodeReaderModule,
     FormsModule,
     MatInputModule,
+    ZXingScannerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
