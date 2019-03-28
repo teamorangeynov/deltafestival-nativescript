@@ -1,4 +1,6 @@
-import { Component, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ViewChild, ElementRef, Renderer2, VERSION } from '@angular/core';
+import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { Result } from '@zxing/library';
 
 @Component({
     selector: 'authentification',
@@ -6,28 +8,69 @@ import { Component, ViewChild, ElementRef, Renderer2 } from '@angular/core';
     styleUrls: ['./authentification.component.scss'],
 })
 export class AuthentificationComponent {
-    title = 'Connexion';
+    ngVersion = VERSION.full;
 
-    elementType = 'url';
-    value = 'https://assets.econsultancy.com/images/resized/0002/4236/qr_code-blog-third.png';
-    @ViewChild('result') resultElement: ElementRef;
-    showQRCode: boolean = true;
-    constructor(private renderer: Renderer2) {
+    @ViewChild('scanner')
+    scanner: ZXingScannerComponent;
 
+    hasDevices: boolean;
+    hasPermission: boolean;
+    qrResultString: string;
+    qrResult: Result;
+
+    availableDevices: MediaDeviceInfo[];
+    currentDevice: MediaDeviceInfo;
+
+    ngOnInit(): void {
+
+        this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
+            this.hasDevices = true;
+            this.availableDevices = devices;
+
+            // selects the devices's back camera by default
+            // for (const device of devices) {
+            //     if (/back|rear|environment/gi.test(device.label)) {
+            //         this.scanner.changeDevice(device);
+            //         this.currentDevice = device;
+            //         break;
+            //     }
+            // }
+        });
+
+        this.scanner.camerasNotFound.subscribe(() => this.hasDevices = false);
+        this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
+        this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
     }
-    render(e) {
-        console.log(e.result);
-        let element: Element = this.renderer.createElement('p');
-        element.innerHTML = e.result;
-        this.renderElement(element);
+
+    displayCameras(cameras: MediaDeviceInfo[]) {
+        console.debug('Devices: ', cameras);
+        this.availableDevices = cameras;
     }
 
-    renderElement(element) {
-        for (let node of this.resultElement.nativeElement.childNodes) {
-            this.renderer.removeChild(this.resultElement.nativeElement, node);
-        }
-        this.renderer.appendChild(this.resultElement.nativeElement, element);
+    handleQrCodeResult(resultString: string) {
+        console.debug('Result: ', resultString);
+        this.qrResultString = resultString;
     }
 
+    onDeviceSelectChange(selectedValue: string) {
+        console.debug('Selection changed: ', selectedValue);
+        this.currentDevice = this.scanner.getDeviceById(selectedValue);
+    }
+
+    stateToEmoji(state: boolean): string {
+
+        const states = {
+            // not checked
+            undefined: '❔',
+            // failed to check
+            null: '⭕',
+            // success
+            true: '✔',
+            // can't touch that
+            false: '❌'
+        };
+
+        return states['' + state];
+    }
 }
 
