@@ -1,0 +1,13 @@
+<GridLayout rows="auto, *, auto, auto, auto">
+	<StackLayout orientation="horizontal" row="0" padding="10">
+		<Label [text]="Enregistrer"></Label>
+		<Switch [(ngModel)]="sauvegarder"></Switch>
+	</StackLayout>
+    <Image row="1" [src]="cameraImage"  margin="10"></Image>
+    <StackLayout class="input-field" row="2" padding="10">
+        <Label class="h3" text="Hashtag:" class="label"></Label>
+        <TextView hint="Choisir un # ..." class="input input-border"></TextView>
+    </StackLayout>
+    <Button class="btn btn-primary" [class.button-active]="!isTaked" [class.button]="isTaked" text="Prendre une photo" (tap)="onTakePictureTap($event)" row="3" padding="10"></Button>
+    <Button class="btn btn-primary" [class.button-active]="isTaked" [class.button]="!isTaked" text="Envoyer" (tap)="send()" row="4" padding="10"></Button>
+</GridLayout>
