@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, Renderer2, VERSION } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Result } from '@zxing/library';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'authentification',
@@ -21,6 +22,10 @@ export class AuthentificationComponent {
     availableDevices: MediaDeviceInfo[];
     currentDevice: MediaDeviceInfo;
 
+    constructor(
+        private router: Router,
+    ) { }
+
     ngOnInit(): void {
 
         this.scanner.camerasFound.subscribe((devices: MediaDeviceInfo[]) => {
@@ -35,11 +40,14 @@ export class AuthentificationComponent {
             //         break;
             //     }
             // }
+            /* this.currentDevice = devices[1]; */
+
         });
 
         this.scanner.camerasNotFound.subscribe(() => this.hasDevices = false);
         this.scanner.scanComplete.subscribe((result: Result) => this.qrResult = result);
         this.scanner.permissionResponse.subscribe((perm: boolean) => this.hasPermission = perm);
+
     }
 
     displayCameras(cameras: MediaDeviceInfo[]) {
@@ -50,6 +58,9 @@ export class AuthentificationComponent {
     handleQrCodeResult(resultString: string) {
         console.debug('Result: ', resultString);
         this.qrResultString = resultString;
+        if (this.qrResultString === "http://fr.wikipedia.org/") {
+            this.router.navigate(['/accueil']);
+        }
     }
 
     onDeviceSelectChange(selectedValue: string) {
