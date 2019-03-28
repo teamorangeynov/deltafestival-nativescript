@@ -60,7 +60,6 @@ export class AuthentificationComponent {
         this.qrResultString = resultString;
         if (this.qrResultString === "http://fr.wikipedia.org/") {
             this.router.navigate(['/accueil']);
-
         }
     }
 
