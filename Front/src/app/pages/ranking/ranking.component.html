@@ -2,7 +2,6 @@
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
-  <button (click)="test()"></button>
   <!-- Position Column -->
   <ng-container matColumnDef="rankingPosition">
     <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -25,3 +24,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<button (click)="test()"></button>

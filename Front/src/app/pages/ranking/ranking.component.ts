@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from 'src/services/models';
-import { TeamService } from '../../../services/services/team.service';
+import { CheckpointService } from '../../../services/services/checkpoint.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-ranking',
-  providers: [TeamService],
+  providers: [CheckpointService],
   templateUrl: './ranking.component.html',
   styleUrls: ['./ranking.component.scss']
 })
@@ -13,7 +13,7 @@ export class RankingComponent implements OnInit {
 
   displayedColumns: string[] = ['rankingPosition', 'nameTeam', 'totalPoints'];
   dataSource: string[];
-  constructor(private router: Router, private teamService: TeamService) {
+  constructor(private router: Router, private teamService: CheckpointService) {
     // this.team = new Team();
   }
 
@@ -21,7 +21,7 @@ export class RankingComponent implements OnInit {
   }
 
   test() {
-    this.teamService.List().subscribe(
+    this.teamService.GetCheckpointsItems().subscribe(
       () => {
         alert('ok');
       },
