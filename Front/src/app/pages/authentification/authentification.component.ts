@@ -1,15 +1,17 @@
-import { Component, ViewChild, ElementRef, Renderer2, VERSION } from '@angular/core';
+import { Component, ViewChild, ElementRef, Renderer2, VERSION, OnInit } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
 import { Result } from '@zxing/library';
+import { Team } from 'src/services/models';
+import { TeamService } from '../../../services/services/team.service';
 import { Router } from '@angular/router';
-
 @Component({
     selector: 'authentification',
     templateUrl: './authentification.component.html',
     styleUrls: ['./authentification.component.scss'],
 })
-export class AuthentificationComponent {
+export class AuthentificationComponent implements OnInit {
     ngVersion = VERSION.full;
+    team: Team;
 
     @ViewChild('scanner')
     scanner: ZXingScannerComponent;
@@ -23,7 +25,7 @@ export class AuthentificationComponent {
     currentDevice: MediaDeviceInfo;
 
     constructor(
-        private router: Router,
+        private router: Router, private teamService: TeamService
     ) { }
 
     ngOnInit(): void {
@@ -82,6 +84,15 @@ export class AuthentificationComponent {
         };
 
         return states['' + state];
+    }
+
+    test() {
+        this.teamService.List().subscribe(
+            () => {
+                alert('ok');
+            },
+            () => alert('pas ok')
+        );
     }
 }
 

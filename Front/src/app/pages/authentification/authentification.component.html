@@ -8,6 +8,7 @@
         [selected]="currentDevice && device.deviceId === currentDevice.deviceId">{{device.label}}</option>
     </select>
   </header>
+  <button (click)="test()"></button>
 
   <zxing-scanner #scanner [device]="currentDevice" (scanSuccess)="handleQrCodeResult($event)"
     [formats]="['EAN_13', 'CODE_128', 'QR_CODE']" [tryHarder]="true"></zxing-scanner>
