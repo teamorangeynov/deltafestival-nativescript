@@ -7,7 +7,7 @@
         "NativeScript"
     ],
     "nativescript": {
-        "id": "TeamOrange",
+        "id": "com.deltafestival.TeamOrange",
         "tns-android": {
             "version": "5.2.0"
         },
