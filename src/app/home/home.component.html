@@ -1,0 +1,26 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Checkpoints"></Label>
+</ActionBar>
+
+<GridLayout class="page page-content">
+    <StackLayout>
+        <Label text="Latitude : {{ latitude }}"></Label>
+        <Label text="Longitute : {{ longitude }}"></Label>
+        <Button *ngFor="let checkpoint of checkpoints" class="btn btn-active" [ngClass]="{'btn-primary' : checkpoint.isActive, 'btn-discovered' : checkpoint.isDiscovered, 'btn-win' : checkpoint.isTeamChecked}"
+            text="{{ checkpoint.name }}" id="{{ checkpoint.id }}{{ checkpoint.name }}" isEnabled="{{ checkpoint.isDiscovered }}" (tap)="validateCheckpoint($event)" checkpointId="{{ checkpoint.id }}"></Button>
+    </StackLayout>
+</GridLayout>
+
