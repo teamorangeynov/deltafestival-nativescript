@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   moduleId: module.id,
 })
 export class HomeComponent {
-  title = 'deltafestival-nativescript';
+  title = 'DeltaFestival - App';
   private counter = 42;
 
   constructor() { }

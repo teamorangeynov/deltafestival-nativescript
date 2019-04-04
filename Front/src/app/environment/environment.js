@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.environment = {
+    production: false,
+    API_BASE_PATH: 'https://localhost:44398'
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW52aXJvbm1lbnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbnZpcm9ubWVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFhLFFBQUEsV0FBVyxHQUFHO0lBQ3ZCLFVBQVUsRUFBRSxLQUFLO0lBQ2pCLGFBQWEsRUFBRSx5QkFBeUI7Q0FDM0MsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBjb25zdCBlbnZpcm9ubWVudCA9IHtcclxuICAgIHByb2R1Y3Rpb246IGZhbHNlLFxyXG4gICAgQVBJX0JBU0VfUEFUSDogJ2h0dHBzOi8vbG9jYWxob3N0OjQ0Mzk4J1xyXG59O1xyXG4iXX0=
